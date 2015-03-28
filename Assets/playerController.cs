@@ -5,10 +5,14 @@ public class playerController : MonoBehaviour {
 
 	//Speed modifier
 	public float speed = 10;
+	//Kockback Modifier
+	public float knockBack = 20;
 	//horizontal input
-	float h;
+	[HideInInspector]
+	public float h;
 	//Vertical Input
-	float v;
+	[HideInInspector]
+	public float v;
 	//The Player number for 
 	public int playerNum;
 
@@ -26,5 +30,17 @@ public class playerController : MonoBehaviour {
 		//add forces to the player based on these inputs
 		gameObject.GetComponent<Rigidbody2D>().AddForce(Vector3.right * h * speed);
 		gameObject.GetComponent<Rigidbody2D>().AddForce(Vector3.up * v * speed);
+
+		//if moving, set animation bool
+		if (h !=0 || v != 0) {
+			gameObject.GetComponent<Animator>().SetBool("moving", true);
+		} else {
+			gameObject.GetComponent<Animator>().SetBool("moving", false);
+		}
+	}
+
+	void knockMeBack (Vector3 direction) {
+		//add knockback force when called
+		gameObject.GetComponent<Rigidbody2D>().AddForce(direction * knockBack);
 	}
 }
