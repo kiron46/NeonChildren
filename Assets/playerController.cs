@@ -14,7 +14,7 @@ public class playerController : MonoBehaviour {
 	[HideInInspector]
 	public float v;
 	//The Player number for 
-	public int playerNum;
+	public string playerNum = "player1";
 
 	// Use this for initialization
 	void Start () {
