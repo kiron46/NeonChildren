@@ -4,11 +4,13 @@ using System.Collections;
 public class playerController : MonoBehaviour {
 
 	//Speed modifier
-	public float speed;
+	public float speed = 10;
 	//horizontal input
 	float h;
 	//Vertical Input
 	float v;
+	//The Player number for 
+	public int playerNum;
 
 	// Use this for initialization
 	void Start () {
@@ -17,7 +19,12 @@ public class playerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		gameObject.Rigidbody2D.AddForce(vector2.right * h);
-		gameObject.Rigidbody2D.AddForce(vector2.up * v);
+		//Get the horizontal and vertical inputs
+		//positive = 1, negative = -1, no input = 0;
+		h = Input.GetAxis("Horizontal");
+		v = Input.GetAxis("Vertical");
+		//add forces to the player based on these inputs
+		gameObject.GetComponent<Rigidbody2D>().AddForce(Vector3.right * h * speed);
+		gameObject.GetComponent<Rigidbody2D>().AddForce(Vector3.up * v * speed);
 	}
 }
