@@ -9,8 +9,12 @@ public class health : MonoBehaviour {
 	//bool that checks if already hit
 	bool invul = false;
 	//timer
-	float timer;
+	float timer = 5.0f;
 	public float coolDown = 5.0f;
+
+	public GameObject light;
+
+
 	// Use this for initialization
 	void Start () {
 		//initialize the health
@@ -31,12 +35,13 @@ public class health : MonoBehaviour {
 			invul = false;
 		}
 
+		light.GetComponent<Light>().intensity = currenthealth / 2;
 		//killMe when dead
 
 	}
 
 	//function called when collides with enemy
-	void hurtMe (int damage) {
+	public void hurtMe (int damage) {
 		//if not invulnerable, subtract damage, make invulnerable
 		if (!invul){
 			//gameObject.GetComponent<playerController>().knockMeback(direction?);
@@ -48,7 +53,7 @@ public class health : MonoBehaviour {
 	}
 
 	//healing script, just in case
-	void healMe (int ammount) {
+	public void healMe (int ammount) {
 		//if not invulnerable, subtract damage, make invulnerable
 		currenthealth += ammount;
 		

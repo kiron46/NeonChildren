@@ -25,12 +25,11 @@ public class playerController : MonoBehaviour {
 	void Update () {
 		//Get the horizontal and vertical inputs
 		//positive = 1, negative = -1, no input = 0;
-		h = Input.GetAxis("Horizontal");
-		v = Input.GetAxis("Vertical");
+		h = Input.GetAxis(playerNum + "_h");
+		v = Input.GetAxis(playerNum + "_v");
 		//add forces to the player based on these inputs
 		gameObject.GetComponent<Rigidbody2D>().AddForce(Vector3.right * h * speed);
 		gameObject.GetComponent<Rigidbody2D>().AddForce(Vector3.up * v * speed);
-
 		//if moving, set animation bool
 		if (h !=0 || v != 0) {
 			gameObject.GetComponent<Animator>().SetBool("moving", true);
