@@ -37,7 +37,9 @@ public class health : MonoBehaviour {
 
 		light.GetComponent<Light>().intensity = currenthealth / 2;
 		//killMe when dead
-
+		if (currenthealth <= 0) {
+			Destroy(this.gameObject);
+		}
 	}
 
 	//function called when collides with enemy

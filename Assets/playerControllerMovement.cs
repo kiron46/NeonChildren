@@ -15,7 +15,8 @@ public class playerControllerMovement : MonoBehaviour {
 	public float v;
 	//The Player number for 
 	public string playerNum = "player1";
-
+	bool facingRight = true;
+	bool lookingRight = true;
 	// Use this for initialization
 	void Start () {
 	
@@ -36,14 +37,47 @@ public class playerControllerMovement : MonoBehaviour {
 		} else {
 			gameObject.GetComponent<Animator>().SetBool("moving", false);
 		}
-
+		//get attack button input, then set attack trigger
 		if (Input.GetButtonDown(playerNum + "_attack")){
 			gameObject.GetComponent<Animator>().SetTrigger("attack");
 		}
+
+
+		flipMe();
+
 	}
 
 	public void knockMeBack (Vector3 direction) {
 		//add knockback force when called
 		gameObject.GetComponent<Rigidbody2D>().AddForce(direction * knockBack);
+	}
+
+	void flipMe() {
+
+		if (h > 0) {
+			lookingRight = false;
+		} else {
+			lookingRight = true;
+		}
+		//reverse scale 
+		if ( lookingRight) {
+			
+			if (facingRight) {
+				Vector3 theScale = transform.localScale;
+				theScale.x *= -1;
+				transform.localScale = theScale;
+				facingRight = false;
+			}
+			
+		} else {
+			
+			if (!facingRight) {
+				Vector3 theScale = transform.localScale;
+				theScale.x *= -1;
+				transform.localScale = theScale;
+				facingRight = true;
+			}
+			
+		}
 	}
 }
